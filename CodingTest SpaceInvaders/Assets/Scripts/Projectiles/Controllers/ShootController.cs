@@ -65,6 +65,7 @@ namespace SpaceInvaders.Projectiles
             if(projectile != null)
             {
                 projectile.transform.position = projectileOrigin;
+                projectile.Activate();
             }
         }
     }

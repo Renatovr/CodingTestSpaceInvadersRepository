@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1957809464628905291, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}
       propertyPath: m_Name
-      value: ProjectileBase
+      value: Invader Projectile
       objectReference: {fileID: 0}
     - target: {fileID: 1957809464628905292, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}
@@ -35,17 +35,17 @@ PrefabInstance:
     - target: {fileID: 1957809464628905293, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1957809464628905293, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1957809464628905293, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 1957809464628905293, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}

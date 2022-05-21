@@ -25,6 +25,11 @@ namespace SpaceInvaders.Projectiles
             gameObject.SetActive(true);
         }
 
+        private void OnBecameInvisible()
+        {
+            gameObject.SetActive(false);
+        }
+
         protected override void OnPoolBehaviourDestroy()
         {
             

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -84,6 +83,8 @@ namespace SpaceInvaders.Invaders
                 for(int columnIndex = 0; columnIndex < rowConfig.ColumnCount; columnIndex++)
                 {
                     var invader = Instantiate(prefab, m_InvadersHolder);
+                    invader.Init();
+
                     var invaderPosition = rowPosition;
                     invaderPosition.x += columnIndex * m_InvaderSpacing;
                     invader.transform.localPosition = invaderPosition;
@@ -103,6 +104,7 @@ namespace SpaceInvaders.Invaders
             }
 
             UpdateGroupPosition();
+            UpdateInvadersBehaviour();
         }
 
         private void UpdateGroupPosition ()
@@ -126,6 +128,17 @@ namespace SpaceInvaders.Invaders
                 {
                     MoveGroupDown();
                     break;
+                }
+            }
+        }
+
+        private void UpdateInvadersBehaviour ()
+        {
+            foreach (var row in m_InvadersRows)
+            {
+                if (row.HasAvailableInvader)
+                {
+                    row.UpdateInvaders();
                 }
             }
         }

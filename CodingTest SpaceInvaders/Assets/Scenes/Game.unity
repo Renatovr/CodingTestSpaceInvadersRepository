@@ -254,8 +254,8 @@ MonoBehaviour:
       type: 3}
   m_InvadersHolder: {fileID: 1442744472}
   m_InvaderSpacing: 1.5
-  m_MovementSpeed: 2
-  m_DownwardStep: 1
+  m_MovementSpeed: 0.5
+  m_DownwardStep: 0.5
   m_ScreenEdgePadding: 0.5
 --- !u!4 &763759773
 Transform:

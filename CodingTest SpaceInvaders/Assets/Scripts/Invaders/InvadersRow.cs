@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace SpaceInvaders.Invaders
 {
@@ -68,6 +66,17 @@ namespace SpaceInvaders.Invaders
                 return rightInvader.transform.position.x >= rightBoundary;
             }
             return false;
+        }
+
+        /// <summary>
+        /// Update all available invaders.
+        /// </summary>
+        public void UpdateInvaders ()
+        {
+            foreach(var invader in m_Invaders)
+            {
+                invader.UpdateInvader();
+            }
         }
 
         private void OnInvaderKilled (Invader invader)

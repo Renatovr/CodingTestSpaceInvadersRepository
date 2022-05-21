@@ -7,7 +7,7 @@ namespace SpaceInvaders.Invaders
     /// <summary>
     /// Handles the general behaviour of each individual invader.
     /// </summary>
-    public class Invader : MonoBehaviour
+    public class Invader : MonoBehaviour, ICanTakeABullet
     {
         /// <summary>
         /// Event fired when the invader takes a hit and dies.
@@ -33,7 +33,7 @@ namespace SpaceInvaders.Invaders
             var shootInterval = UnityEngine.Random.Range(m_MinimumShootInterval, m_MaximumShootInteral);
             var firstShootTime = Time.time + shootInterval;
             m_ShootController = new ShootController(m_ProjectilePrefab, shootInterval, firstShootTime);
-
+            gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -49,10 +49,15 @@ namespace SpaceInvaders.Invaders
             }
         }
 
-        private void Die ()
+        public void TakeTheBullet()
         {
-            OnInvaderKilled?.Invoke(this);
+            Die();
+        }
+
+        private void Die()
+        {
             gameObject.SetActive(false);
+            OnInvaderKilled?.Invoke(this);
         }
     }
 }

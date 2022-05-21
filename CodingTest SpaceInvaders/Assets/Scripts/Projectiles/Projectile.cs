@@ -34,5 +34,16 @@ namespace SpaceInvaders.Projectiles
         {
             
         }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            var bulletTaker = collision.transform.GetComponent<ICanTakeABullet>();
+
+            if(bulletTaker != null)
+            {
+                bulletTaker.TakeTheBullet();
+                gameObject.SetActive(false);
+            }
+        }
     }
 }

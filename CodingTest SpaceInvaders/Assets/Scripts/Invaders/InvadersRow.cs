@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace SpaceInvaders.Invaders
 {
@@ -7,12 +9,21 @@ namespace SpaceInvaders.Invaders
     /// </summary>
     public class InvadersRow
     {
+        public event Action OnRowCleared;
+
         private List<Invader> m_Invaders;
 
         /// <summary>
         /// Whether the row has at least one available invader.
         /// </summary>
-        public bool HasAvailableInvader => m_Invaders.Count > 0;
+        public bool HasAvailableInvader
+        {
+            get
+            {
+                var activeInvaders = m_Invaders.Where(inv => inv.gameObject.activeSelf);
+                return activeInvaders.Count() > 0;
+            }
+        }
 
         /// <summary>
         /// Construct a new instance of InvadersRow with all necessary internal initialization.
@@ -29,8 +40,9 @@ namespace SpaceInvaders.Invaders
         public void RegisterInvader (Invader invader)
         {
             invader.OnInvaderKilled += OnInvaderKilled;
+            invader.Init();
 
-            if(!m_Invaders.Contains(invader))
+            if (!m_Invaders.Contains(invader))
             {
                 m_Invaders.Add(invader);
             }
@@ -45,9 +57,12 @@ namespace SpaceInvaders.Invaders
         {
             if(m_Invaders.Count > 0)
             {
-                var leftInvader = m_Invaders[0];
+                var leftInvader = m_Invaders.Where(inv => inv.gameObject.activeSelf).FirstOrDefault();
 
-                return leftInvader.transform.position.x <= leftBoundary;
+                if(leftInvader != null)
+                {
+                    return leftInvader.transform.position.x <= leftBoundary;
+                }
             }
             return false;
         }
@@ -61,9 +76,12 @@ namespace SpaceInvaders.Invaders
         {
             if (m_Invaders.Count > 0)
             {
-                var rightInvader = m_Invaders[(m_Invaders.Count - 1)];
+                var rightInvader = m_Invaders.Where(inv => inv.gameObject.activeSelf).LastOrDefault();
 
-                return rightInvader.transform.position.x >= rightBoundary;
+                if(rightInvader != null)
+                {
+                    return rightInvader.transform.position.x >= rightBoundary;
+                }
             }
             return false;
         }
@@ -73,9 +91,21 @@ namespace SpaceInvaders.Invaders
         /// </summary>
         public void UpdateInvaders ()
         {
-            foreach(var invader in m_Invaders)
+            var availableInvaders = m_Invaders.Where(inv => inv.gameObject.activeSelf);
+            foreach (var invader in availableInvaders)
             {
                 invader.UpdateInvader();
+            }
+        }
+
+        /// <summary>
+        /// Reset all invaders the row
+        /// </summary>
+        public void ResetRow()
+        {
+            foreach(var invader in m_Invaders)
+            {
+                RegisterInvader(invader);
             }
         }
 
@@ -83,9 +113,9 @@ namespace SpaceInvaders.Invaders
         {
             invader.OnInvaderKilled -= OnInvaderKilled;
 
-            if (m_Invaders.Contains(invader))
+            if(!HasAvailableInvader)
             {
-                m_Invaders.Remove(invader);
+                OnRowCleared?.Invoke();
             }
         }
     }

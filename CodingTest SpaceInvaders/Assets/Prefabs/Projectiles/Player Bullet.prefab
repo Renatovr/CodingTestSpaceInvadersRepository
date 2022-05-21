@@ -10,7 +10,12 @@ PrefabInstance:
     - target: {fileID: 1957809464628905291, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}
       propertyPath: m_Name
-      value: ProjectileBase
+      value: Player Bullet
+      objectReference: {fileID: 0}
+    - target: {fileID: 1957809464628905291, guid: ff05e8483bddc4eefa206980e671c722,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1957809464628905293, guid: ff05e8483bddc4eefa206980e671c722,
         type: 3}

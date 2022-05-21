@@ -9,6 +9,7 @@ namespace SpaceInvaders.Invaders
     /// </summary>
     public class InvadersGroup : MonoBehaviour
     {
+        [Header("Spawning")]
         [Tooltip("Configurations with which the invaders will be spawned.")]
         [SerializeField] private RowConfigModel[] m_RowConfigurations;
 
@@ -18,18 +19,31 @@ namespace SpaceInvaders.Invaders
         [Tooltip("Vertical and horizontal spacing for the invaders.")]
         [SerializeField] private float m_InvaderSpacing = 1.0f;
 
-        private List<InvadersRow> m_InvadersRows;
+        [Space]
+        [Header("Movement")]
+        [Tooltip("The horizontal movement speed of the herd of invaders.")]
+        [SerializeField] private float m_MovementSpeed = 1.0f;
 
-        // Start is called before the first frame update
+        [Tooltip("How far the group will move downwards each time it hits the edge of the screen.")]
+        [SerializeField] private float m_DownwardStep = 1.0f;
+
+        [Tooltip("Padding from the actual left/right screen edge. Used in determining when to move the group down.")]
+        [SerializeField] private float m_ScreenEdgePadding = 0.5f;
+
+        private List<InvadersRow> m_InvadersRows;
+        private Vector2 movementDirection;
+
+        // Start is called before the first frame update.
         private void Start()
         {
             Init();
         }
 
-        //Initialize the component
+        //Initialize the component.
         private void Init ()
         {
             m_InvadersRows = new List<InvadersRow>();
+            movementDirection = Vector2.right;
 
             if (m_InvadersHolder == null)
             {
@@ -65,7 +79,8 @@ namespace SpaceInvaders.Invaders
                 m_InvadersRows.Add(row);
 
                 var prefab = rowConfig.InvaderPrefab;
-                
+
+                //Spawn columns of invaders (left to right)
                 for(int columnIndex = 0; columnIndex < rowConfig.ColumnCount; columnIndex++)
                 {
                     var invader = Instantiate(prefab, m_InvadersHolder);
@@ -78,10 +93,51 @@ namespace SpaceInvaders.Invaders
             }
         }
 
-        // Update is called once per frame
+        // Update is called once per frame.
         private void Update()
         {
+            if(Time.timeScale == 0)
+            {
+                //Don't update the component while the game is paused.
+                return;
+            }
 
+            UpdateGroupPosition();
+        }
+
+        private void UpdateGroupPosition ()
+        {
+            Vector3 movement = movementDirection * m_MovementSpeed * Time.deltaTime;
+            m_InvadersHolder.position += movement;
+
+            var cam = Camera.main;
+            var leftEdge = cam.ViewportToWorldPoint(Vector3.zero);
+            var rightEdge = cam.ViewportToWorldPoint(Vector3.right);
+
+            foreach(var row in m_InvadersRows)
+            {
+                if(!row.HasAvailableInvader)
+                {
+                    continue;
+                }
+
+                if((movementDirection == Vector2.right && row.HasInvaderBeyondCameraRightBoundary((rightEdge.x - m_ScreenEdgePadding))) ||
+                    (movementDirection == Vector2.left && row.HasInvaderBeyondCameraLeftBoundary((leftEdge.x + m_ScreenEdgePadding))))
+                {
+                    MoveGroupDown();
+                    break;
+                }
+            }
+        }
+
+        private void MoveGroupDown ()
+        {
+            var position = m_InvadersHolder.position;
+            position.y -= m_DownwardStep;
+            m_InvadersHolder.position = position;
+
+            //Change movement direction
+            movementDirection.x *= -1.0f;
         }
     }
 }

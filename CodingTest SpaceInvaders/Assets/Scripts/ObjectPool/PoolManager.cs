@@ -45,7 +45,7 @@ namespace SpaceInvaders.Pooling
             //Create a new pool for the object, if not available
             if (!m_Pools.TryGetValue(objectPrefab, out var pool))
             {
-                pool = new GameObject($"Pool ({nameof(T)})").AddComponent<Pool>();
+                pool = new GameObject($"Pool ({objectPrefab.name})").AddComponent<Pool>();
                 pool.transform.parent = transform;
                 m_Pools[objectPrefab] = pool;
             }

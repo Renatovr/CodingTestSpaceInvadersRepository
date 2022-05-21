@@ -14,7 +14,7 @@ namespace SpaceInvaders.Player
         private PlayerMovementController m_MovementController;
 
         // Start is called before the first frame update
-        void Start()
+        private void Start()
         {
             Init();
         }
@@ -25,7 +25,7 @@ namespace SpaceInvaders.Player
         }
 
         // Update is called once per frame
-        void Update()
+        private void Update()
         {
             transform.position = m_MovementController.GetUpdatedPosition(transform.position);
         }

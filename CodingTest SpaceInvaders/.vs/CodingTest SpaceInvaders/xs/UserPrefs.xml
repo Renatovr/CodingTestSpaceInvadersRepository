@@ -1,8 +1,12 @@
 ﻿<Properties StartupConfiguration="{903597EE-6B39-0D38-BE0E-BF1723BA689D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player/Controllers/PlayerMovementController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Invaders/InvadersRow.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player/PlayerView.cs" Line="15" Column="42" />
-      <File FileName="Assets/Scripts/Player/Controllers/PlayerMovementController.cs" Line="4" Column="1" />
+      <File FileName="Assets/Scripts/Player/PlayerView.cs" Line="12" Column="59" />
+      <File FileName="Assets/Scripts/Player/Controllers/PlayerMovementController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Invaders/Models/RowConfigModel.cs" Line="7" Column="52" />
+      <File FileName="Assets/Scripts/Invaders/Invader.cs" Line="8" Column="66" />
+      <File FileName="Assets/Scripts/Invaders/InvadersRow.cs" Line="15" Column="96" />
+      <File FileName="Assets/Scripts/Invaders/InvadersGroup.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

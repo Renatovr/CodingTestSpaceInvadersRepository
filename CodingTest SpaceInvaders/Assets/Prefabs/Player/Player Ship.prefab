@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 3769304623927292955}
   - component: {fileID: 3769304623927292954}
   - component: {fileID: 3769304623927293029}
-  m_Layer: 8
+  m_Layer: 6
   m_Name: Player Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,6 +159,6 @@ MonoBehaviour:
   m_MovementSpeed: 8
   m_ProjectilePrefab: {fileID: 3763202376319892114, guid: 57f2117a54d81497e8464fcdbfd8a13b,
     type: 3}
-  m_ShoorInterval: 1
+  m_ShoorInterval: 0.1
   m_ShootPoint: {fileID: 3769304623908948879}
   m_ShootKey: 115

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using SpaceInvaders.Projectiles;
+using SpaceInvaders.Score;
 
 namespace SpaceInvaders.Invaders
 {
@@ -9,6 +10,7 @@ namespace SpaceInvaders.Invaders
     /// </summary>
     public class Invader : MonoBehaviour, ICanTakeABullet
     {
+        private const int SCORE_POINTS_FROM_DEFEAT = 100;
         /// <summary>
         /// Event fired when the invader takes a hit and dies.
         /// </summary>
@@ -56,6 +58,12 @@ namespace SpaceInvaders.Invaders
 
         private void Die()
         {
+            //Add points to score.
+            if(ScoreManager.Instance != null)
+            {
+                ScoreManager.Instance.AddPointsToScore(SCORE_POINTS_FROM_DEFEAT);
+            }
+
             gameObject.SetActive(false);
             OnInvaderKilled?.Invoke(this);
         }

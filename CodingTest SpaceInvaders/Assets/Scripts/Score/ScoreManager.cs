@@ -15,6 +15,9 @@ namespace SpaceInvaders.Score
         [Tooltip("Reference to a GameplayScoreView component. This component should handle displaying scores during a session.")]
         [SerializeField] private GameplayScoreView m_GameplayScoreView;
 
+        [Tooltip("Reference to a LeaderboardView component. This component should handle displaying the leaderboard.")]
+        [SerializeField] private LeaderboardView m_LeaderboardView;
+
         private int m_CurrentScore = 0;
         private int m_HighScore = 0;
 
@@ -66,6 +69,32 @@ namespace SpaceInvaders.Score
             };
 
             Leaderboard.AddLeaderboardEntry(leaderboardEntry);
+            m_LeaderboardView.RefreshLeaderboard();
+        }
+
+        /// <summary>
+        /// Show the score view for the play session.
+        /// </summary>
+        public void ShowGameScoreView ()
+        {
+            m_GameplayScoreView.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Show the leaderboard view.
+        /// </summary>
+        public void ShowLeaderboardView ()
+        {
+            m_LeaderboardView.gameObject.SetActive(true);
+        }
+
+        /// <summary>
+        /// Hide all available score views.
+        /// </summary>
+        public void HideAllViews ()
+        {
+            m_GameplayScoreView.gameObject.SetActive(false);
+            m_LeaderboardView.gameObject.SetActive(false);
         }
     }
 }

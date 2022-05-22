@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using SpaceInvaders.Score;
 
 /// <summary>
 /// Controls the HUD UI for gameplay.
@@ -42,7 +41,7 @@ public class GameplayGuiControl : MonoBehaviour
     }
 
     /// <summary>
-    /// Method to call when the exi button is pressed.
+    /// Method to call when the exit button is pressed.
     /// </summary>
     public void OnExitButtonPressed()
     {
@@ -51,6 +50,14 @@ public class GameplayGuiControl : MonoBehaviour
         m_GameOverMenu.SetActive(false);
 
         GameplayManager.Instance.ReturnToMenu();
+    }
+
+    /// <summary>
+    /// Called when leaderboard button on the exit menu is pressed.
+    /// </summary>
+    public void OnLeaderboardButtonPressed ()
+    {
+        ScoreManager.Instance.ShowLeaderboardView();
     }
 
     private void OnGameSessionEnded ()

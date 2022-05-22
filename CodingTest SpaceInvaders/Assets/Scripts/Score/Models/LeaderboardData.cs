@@ -18,7 +18,7 @@ namespace SpaceInvaders.Score
         /// <summary>
         /// Static instance of a Leaderboard
         /// </summary>
-        public static LeaderboardData Data;
+        public static LeaderboardData Data { get; private set; }
         
         /// <summary>
         /// Load leaderboard data from a system file, if available.

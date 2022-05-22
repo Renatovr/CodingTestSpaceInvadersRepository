@@ -13,7 +13,7 @@ namespace SpaceInvaders.Score
     public static class Leaderboard
     {
         private const string SAVE_FILE_NAME = "Leaderboard.spc";
-        private const int LEADERBOARD_ENTRIES_LIMIT = 100;
+        private const int LEADERBOARD_ENTRIES_LIMIT = 3;
 
         /// <summary>
         /// Static instance of a Leaderboard

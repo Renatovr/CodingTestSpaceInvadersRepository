@@ -9,6 +9,8 @@ public static class AppHelper
     private const string GAMEPLAY_SCENE_NAME = "Game";
     private const string MENU_SCENE_NAME = "Menu";
 
+    public static string PlayerName;
+
     /// <summary>
     /// Load the gameplay scene.
     /// </summary>
@@ -32,8 +34,8 @@ public static class AppHelper
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.ExitPlaymode();
-        return;
-#endif
+#else
         Application.Quit();
+#endif
     }
 }

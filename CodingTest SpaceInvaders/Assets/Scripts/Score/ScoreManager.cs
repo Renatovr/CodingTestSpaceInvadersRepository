@@ -36,7 +36,16 @@ namespace SpaceInvaders.Score
 
         private void Init ()
         {
-            Leaderboard.LoadFromFile();
+            //This will also lead to the loading of the leaderboard data.
+            m_LeaderboardView.RefreshLeaderboard();
+
+            var highestPlayer = Leaderboard.GetHighestUser();
+
+            if(highestPlayer != null)
+            {
+                m_HighScore = highestPlayer.ScorePoints;
+            }
+
             m_GameplayScoreView.UpdateScores(m_CurrentScore, m_HighScore);
         }
 
@@ -64,7 +73,7 @@ namespace SpaceInvaders.Score
             //Create new leaderboard entry for the user
             var leaderboardEntry = new LeaderboardEntry
             {
-                PlayerName = "TestPlayer",
+                PlayerName = AppHelper.PlayerName,
                 ScorePoints = m_CurrentScore
             };
 

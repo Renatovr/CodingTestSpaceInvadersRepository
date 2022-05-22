@@ -76,6 +76,17 @@ namespace SpaceInvaders.Score
             Data.LeaderboardEntries = sortedData.ToList();
             SaveToFile();
         }
+
+        public static LeaderboardEntry GetHighestUser ()
+        {
+            if(Data != null && Data.LeaderboardEntries.Count > 0)
+            {
+                var highest = Data.LeaderboardEntries.OrderBy(entry => entry.ScorePoints).Reverse().First();
+
+                return highest;
+            }
+            return null;
+        }
     }
 
     /// <summary>

@@ -53,6 +53,14 @@ public class GameplayGuiControl : MonoBehaviour
     }
 
     /// <summary>
+    /// Called when the quit button is pressed.
+    /// </summary>
+    public void OnQuitButtonPressed ()
+    {
+        AppHelper.QuitGame();
+    }
+
+    /// <summary>
     /// Called when leaderboard button on the exit menu is pressed.
     /// </summary>
     public void OnLeaderboardButtonPressed ()

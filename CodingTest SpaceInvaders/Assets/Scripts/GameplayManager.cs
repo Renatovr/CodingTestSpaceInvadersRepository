@@ -5,32 +5,14 @@ using SpaceInvaders.Score;
 
 public class GameplayManager : MonoBehaviour
 {
-    private static GameplayManager m_Instance;
+    public static GameplayManager Instance { get; private set; }
 
-    public static GameplayManager Instance
+    private enum GameState
     {
-        get
-        {
-            //First search for GameplayManager in the scene.
-            if(m_Instance == null)
-            {
-                m_Instance = FindObjectOfType<GameplayManager>();
-            }
-
-            //If still none available, create a new one.
-            if (m_Instance == null)
-            {
-                m_Instance = new GameObject(nameof(GameplayManager)).AddComponent<GameplayManager>();
-            }
-
-            //Initialize the object if not already initialized
-            if(!m_Instance.m_IsInitialized)
-            {
-                m_Instance.Init();
-            }
-
-            return m_Instance;
-        }
+        Starting,
+        Playing,
+        Paused,
+        Ended
     }
 
     /// <summary>
@@ -48,19 +30,35 @@ public class GameplayManager : MonoBehaviour
     /// </summary>
     public event Action OnGameResumed;
 
-    [Tooltip("The amount of lives the player should start with.")]
-    [SerializeField] private int m_StartingPlayerLives = 3;
+    [Tooltip("The amount of extra lives the player should start with.")]
+    [SerializeField] private int m_StartingExtraPlayerLives = 3;
 
     [Tooltip("Interval between player death and respawn.")]
     [SerializeField] private float m_RespawnDelaySeconds = 2.0f;
 
-    private bool m_IsInitialized = false;
     private int m_CurrentPlayerLives;
+    private GameState m_GameState;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            //Set this as the instance.
+            Instance = this;
+            Init();
+        }
+        else if (Instance != null && Instance != this)
+        {
+            //If another instance already exists.
+            Destroy(gameObject);
+        }
+    }
 
     private void Init ()
     {
-        m_CurrentPlayerLives = m_StartingPlayerLives;
-        m_IsInitialized = true;
+        m_CurrentPlayerLives = m_StartingExtraPlayerLives;
+        ScoreManager.Instance.ShowGameScoreView();
+        m_GameState = GameState.Playing;
     }
 
     /// <summary>
@@ -70,6 +68,7 @@ public class GameplayManager : MonoBehaviour
     {
         Time.timeScale = 0f;
         OnGamePaused?.Invoke();
+        m_GameState = GameState.Paused;
     }
 
     /// <summary>
@@ -79,6 +78,7 @@ public class GameplayManager : MonoBehaviour
     {
         Time.timeScale = 1.0f;
         OnGameResumed?.Invoke();
+        m_GameState = GameState.Playing;
     }
 
     /// <summary>
@@ -87,6 +87,8 @@ public class GameplayManager : MonoBehaviour
     public void ReturnToMenu ()
     {
         Time.timeScale = 1.0f;
+        ScoreManager.Instance.HideAllViews();
+        AppHelper.GoToMenuScene();
     }
 
     /// <summary>
@@ -108,6 +110,13 @@ public class GameplayManager : MonoBehaviour
 
     private void EndGame ()
     {
+        if(m_GameState == GameState.Ended)
+        {
+            //We already ended.
+            return;
+        }
+
+        m_GameState = GameState.Ended;
         Time.timeScale = 0f;
         //Save the accummulated score points
         if (ScoreManager.Instance != null)

@@ -6,8 +6,10 @@ namespace SpaceInvaders.Player
     /// <summary>
     /// The class to hold and handle the general behaviour of the player ship.
     /// </summary>
-    public class PlayerView : MonoBehaviour
+    public class PlayerView : MonoBehaviour, ICanTakeABullet
     {
+        private const int RESPAWN_DELAY_MILLISECONDS = 1000;
+
         [Tooltip("The speed with which the player will move horizontally, while being controlled.\n" +
             "This value will be applied on initialization, and will not be updated in real-time.")]
         [SerializeField] private float m_MovementSpeed = 5f;
@@ -57,6 +59,17 @@ namespace SpaceInvaders.Player
             {
                 _ = m_ShootController.TryShoot(m_ShootPoint.position);
             }
+        }
+
+        public void TakeTheBullet()
+        {
+            gameObject.SetActive(false);
+            GameplayManager.Instance.RespawnOrEndGame(Respawn);
+        }
+
+        private void Respawn ()
+        {
+            gameObject.SetActive(true);
         }
     }
 }

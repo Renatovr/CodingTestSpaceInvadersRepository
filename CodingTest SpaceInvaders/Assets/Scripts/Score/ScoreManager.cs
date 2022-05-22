@@ -33,6 +33,7 @@ namespace SpaceInvaders.Score
 
         private void Init ()
         {
+            Leaderboard.LoadFromFile();
             m_GameplayScoreView.UpdateScores(m_CurrentScore, m_HighScore);
         }
 
@@ -50,6 +51,21 @@ namespace SpaceInvaders.Score
             }
 
             m_GameplayScoreView.UpdateScores(m_CurrentScore, m_HighScore);
+        }
+
+        /// <summary>
+        /// Save the scores which have been accumulated by the user
+        /// </summary>
+        public void SaveUserScore ()
+        {
+            //Create new leaderboard entry for the user
+            var leaderboardEntry = new LeaderboardEntry
+            {
+                PlayerName = "TestPlayer",
+                ScorePoints = m_CurrentScore
+            };
+
+            Leaderboard.AddLeaderboardEntry(leaderboardEntry);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿<Properties StartupConfiguration="{903597EE-6B39-0D38-BE0E-BF1723BA689D}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Score/GameplayScoreView.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/GameplayManager.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player/PlayerView.cs" Line="58" Column="71" />
+      <File FileName="Assets/Scripts/Player/PlayerView.cs" Line="72" Column="38" />
       <File FileName="Assets/Scripts/Player/Controllers/PlayerMovementController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Invaders/Models/RowConfigModel.cs" Line="15" Column="67" />
-      <File FileName="Assets/Scripts/Invaders/Invader.cs" Line="60" Column="43" />
+      <File FileName="Assets/Scripts/Invaders/Invader.cs" Line="64" Column="82" />
       <File FileName="Assets/Scripts/Invaders/InvadersRow.cs" Line="118" Column="40" />
       <File FileName="Assets/Scripts/Invaders/InvadersGroup.cs" Line="182" Column="13" />
       <File FileName="Assets/Scripts/Projectiles/Projectile.cs" Line="45" Column="45" />
@@ -13,8 +13,10 @@
       <File FileName="Assets/Scripts/ObjectPool/PooledBehaviour.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Projectiles/Controllers/ShootController.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Interfaces/ICanTakeABullet.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Score/ScoreManager.cs" Line="16" Column="39" />
-      <File FileName="Assets/Scripts/Score/GameplayScoreView.cs" Line="8" Column="1" />
+      <File FileName="Assets/Scripts/Score/ScoreManager.cs" Line="36" Column="40" />
+      <File FileName="Assets/Scripts/Score/GameplayScoreView.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameplayManager.cs" Line="61" Column="13" />
+      <File FileName="Assets/Scripts/Score/Models/LeaderboardData.cs" Line="58" Column="61" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

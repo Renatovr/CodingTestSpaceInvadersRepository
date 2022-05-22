@@ -383,6 +383,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Ship
       objectReference: {fileID: 0}
+    - target: {fileID: 3769304623927292953, guid: 6494aff51ce2f497e83626efe7864b0a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3769304623927293028, guid: 6494aff51ce2f497e83626efe7864b0a,
         type: 3}
       propertyPath: m_RootOrder

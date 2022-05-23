@@ -126,5 +126,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ProjectilePrefab: {fileID: 8549830618550090757, guid: bde589d84bdee47fe98ba35ddcce9eaa,
     type: 3}
-  m_MinimumShootInterval: 10
-  m_MaximumShootInteral: 60
+  m_SpriteRenderer: {fileID: 8721675703265861302}

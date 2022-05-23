@@ -23,7 +23,7 @@ namespace SpaceInvaders.Invaders
         [SerializeField] private float m_InvaderSpacing = 1.0f;
 
         [Space]
-        [Header("Movement And Shooting")]
+        [Header("Movement, Effects And Shooting")]
         [Tooltip("The horizontal movement speed of the herd of invaders.")]
         [SerializeField] private float m_MovementSpeed = 1.0f;
 
@@ -43,6 +43,14 @@ namespace SpaceInvaders.Invaders
 
         [Tooltip("Maximum interval between projectileShots.")]
         [SerializeField] private float m_MaximumShootInteral = 5f;
+
+        [Space]
+
+        [Tooltip("Particle Effect to play on Invader death.")]
+        [SerializeField] private ParticleSystem m_DeathParticle;
+
+        [Tooltip("How many particles to emit when playing the death particle")]
+        [SerializeField] private int m_DeathParticleCount = 30;
 
         [Space]
         [Header("Progression")]
@@ -213,8 +221,16 @@ namespace SpaceInvaders.Invaders
             }
         }
 
-        private void OnInvaderKilled ()
+        private void OnInvaderKilled (Invader invader)
         {
+            if(m_DeathParticle != null && m_DeathParticleCount > 0)
+            {
+                var emitParams = new ParticleSystem.EmitParams();
+                emitParams.position = invader.transform.position;
+                emitParams.startColor = invader.Color;
+                m_DeathParticle.Emit(emitParams, m_DeathParticleCount);
+            }
+
             IncreaseDifficultyPerInvaderKilled();
         }
 

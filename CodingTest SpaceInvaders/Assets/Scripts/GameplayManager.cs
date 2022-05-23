@@ -57,6 +57,7 @@ public class GameplayManager : MonoBehaviour
     private void Init ()
     {
         m_CurrentPlayerLives = m_StartingExtraPlayerLives;
+        ScoreManager.Instance.Refresh();
         ScoreManager.Instance.ShowGameScoreView();
         m_GameState = GameState.Playing;
     }

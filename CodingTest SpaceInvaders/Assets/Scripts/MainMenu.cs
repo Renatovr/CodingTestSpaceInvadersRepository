@@ -12,6 +12,7 @@ public class MainMenu : MonoBehaviour
     private void Start()
     {
         m_PlayerNameInput.text = AppHelper.PlayerName;
+        Application.targetFrameRate = 60;
     }
 
     /// <summary>

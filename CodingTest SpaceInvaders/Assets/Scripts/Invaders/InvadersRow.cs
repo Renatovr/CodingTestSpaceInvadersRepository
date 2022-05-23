@@ -17,7 +17,7 @@ namespace SpaceInvaders.Invaders
         /// <summary>
         /// Event called each time an invader is killed.
         /// </summary>
-        public event Action OnInvaderKilledEvent;
+        public event Action<Invader> OnInvaderKilledEvent;
 
         private List<Invader> m_Invaders;
 
@@ -144,7 +144,7 @@ namespace SpaceInvaders.Invaders
         private void OnInvaderKilled (Invader invader)
         {
             invader.OnInvaderKilled -= OnInvaderKilled;
-            OnInvaderKilledEvent?.Invoke();
+            OnInvaderKilledEvent?.Invoke(invader);
 
             if(!HasAvailableInvader)
             {

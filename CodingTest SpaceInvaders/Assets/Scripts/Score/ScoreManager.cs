@@ -40,10 +40,13 @@ namespace SpaceInvaders.Score
 
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            Init();
+            Refresh();
         }
 
-        private void Init ()
+        /// <summary>
+        /// Refresh all values of the score view.
+        /// </summary>
+        public void Refresh ()
         {
             //This will also lead to the loading of the leaderboard data.
             m_LeaderboardView.RefreshLeaderboard();

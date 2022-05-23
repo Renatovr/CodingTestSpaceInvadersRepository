@@ -19,7 +19,15 @@ namespace SpaceInvaders.Invaders
         [Tooltip("Reference to a projectile prefab to be shot.")]
         [SerializeField] private Projectile m_ProjectilePrefab;
 
+        [Tooltip("SpriteRenderer component on this invader's gameObject.")]
+        [SerializeField] private SpriteRenderer m_SpriteRenderer;
+
         private ShootController m_ShootController;
+
+        /// <summary>
+        /// The color of this invader.
+        /// </summary>
+        public Color Color => m_SpriteRenderer != null ? m_SpriteRenderer.color : Color.white;
 
         /// <summary>
         /// Initialize the invader

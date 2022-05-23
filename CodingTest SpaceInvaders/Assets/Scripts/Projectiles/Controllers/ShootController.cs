@@ -17,12 +17,10 @@ namespace SpaceInvaders.Projectiles
         /// </summary>
         /// <param name="projectilePrefab"></param>
         /// <param name="shootInterval"></param>
-        /// <param name="firstShootTime">The time the first shot should be taken</param>
-        public ShootController (Projectile projectilePrefab, float shootInterval, float firstShootTime = 0f)
+        public ShootController (Projectile projectilePrefab, float shootInterval)
         {
             m_ProjectilePrefab = projectilePrefab;
             m_ShootInterval = shootInterval;
-            m_NextShootTime = firstShootTime;
         }
 
         /// <summary>
@@ -32,6 +30,19 @@ namespace SpaceInvaders.Projectiles
         public void UpdateShootInterval (float newShootInterval)
         {
             m_ShootInterval = newShootInterval;
+        }
+
+        /// <summary>
+        /// Ignore hoot interval and other conditions and fire immediately.
+        /// </summary>
+        public void ShootImmediately (Vector3 projectileOrigin)
+        {
+            if (m_ProjectilePrefab == null)
+            {
+                return;
+            }
+
+            Shoot(projectileOrigin);
         }
 
         /// <summary>

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 
 namespace SpaceInvaders.Invaders
@@ -22,7 +23,7 @@ namespace SpaceInvaders.Invaders
         [SerializeField] private float m_InvaderSpacing = 1.0f;
 
         [Space]
-        [Header("Movement")]
+        [Header("Movement And Shooting")]
         [Tooltip("The horizontal movement speed of the herd of invaders.")]
         [SerializeField] private float m_MovementSpeed = 1.0f;
 
@@ -36,6 +37,14 @@ namespace SpaceInvaders.Invaders
         [SerializeField] private float m_MaximumInvasionPositionY = -6.0f;
 
         [Space]
+
+        [Tooltip("Minimum interval between projectileShots.")]
+        [SerializeField] private float m_MinimumShootInterval = 1f;
+
+        [Tooltip("Maximum interval between projectileShots.")]
+        [SerializeField] private float m_MaximumShootInteral = 5f;
+
+        [Space]
         [Header("Progression")]
         [Tooltip("Reference to a difficulty configuration asset.")]
         [SerializeField] private InvadersDifficultyConfiguration m_DifficultyConfig;
@@ -46,8 +55,9 @@ namespace SpaceInvaders.Invaders
 
         private float m_WaveSpeed = 1.0f;
         private float m_ProgressionSpeed = 0.0f;
-
         private float m_DifficultySpeedMultiplier => (m_WaveSpeed + m_ProgressionSpeed);
+
+        private float m_ShootWaitTime = 0f;
 
         // Start is called before the first frame update.
         private void Start()
@@ -61,6 +71,7 @@ namespace SpaceInvaders.Invaders
             m_InvadersRows = new List<InvadersRow>();
             m_MovementDirection = Vector2.right;
             m_InvadersHolderStartPosition = m_InvadersHolder.position;
+            ResetShootWaitTime();
 
             if (m_InvadersHolder == null)
             {
@@ -123,7 +134,7 @@ namespace SpaceInvaders.Invaders
             }
 
             UpdateGroupPosition();
-            UpdateInvadersBehaviour();
+            UpdateShooting();
         }
 
         private void UpdateGroupPosition ()
@@ -151,14 +162,16 @@ namespace SpaceInvaders.Invaders
             }
         }
 
-        private void UpdateInvadersBehaviour ()
+        private void UpdateShooting ()
         {
-            foreach (var row in m_InvadersRows)
+            if(m_ShootWaitTime > 0f)
             {
-                if (row.HasAvailableInvader)
-                {
-                    row.UpdateInvaders();
-                }
+                m_ShootWaitTime -= Time.deltaTime * m_DifficultySpeedMultiplier;
+            }
+            else
+            {
+                SignalShoot();
+                ResetShootWaitTime();
             }
         }
 
@@ -185,6 +198,18 @@ namespace SpaceInvaders.Invaders
                     GameplayManager.Instance.InvadersAreHere();
                     enabled = false;
                 }
+            }
+        }
+
+        private void SignalShoot ()
+        {
+            var activeRows = m_InvadersRows.Where(row => row.HasAvailableInvader);
+
+            if(activeRows.Count() > 0)
+            {
+                var row = activeRows.ElementAt(Random.Range(0, activeRows.Count()));
+
+                row.SignalShoot();
             }
         }
 
@@ -246,6 +271,11 @@ namespace SpaceInvaders.Invaders
             }
 
             m_ProgressionSpeed = 0f;
+        }
+
+        private void ResetShootWaitTime ()
+        {
+            m_ShootWaitTime = Random.Range(m_MinimumShootInterval, m_MaximumShootInteral);
         }
     }
 }

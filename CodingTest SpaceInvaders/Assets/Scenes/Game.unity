@@ -729,6 +729,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3769304623927293029, guid: 6494aff51ce2f497e83626efe7864b0a,
+        type: 3}
+      propertyPath: m_ShoorInterval
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6494aff51ce2f497e83626efe7864b0a, type: 3}
 --- !u!1001 &4570203177659793146
@@ -759,6 +764,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 0adedc269473d4e83a3a27948def328a,
         type: 2}
+    - target: {fileID: 4570203177030513249, guid: 996485a80477140bc992309401356ed1,
+        type: 3}
+      propertyPath: m_MaximumShootInteral
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4570203177030513249, guid: 996485a80477140bc992309401356ed1,
+        type: 3}
+      propertyPath: m_MinimumShootInterval
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4570203177030513249, guid: 996485a80477140bc992309401356ed1,
         type: 3}
       propertyPath: m_MaximumInvasionPositionY

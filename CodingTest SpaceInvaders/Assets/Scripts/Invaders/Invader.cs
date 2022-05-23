@@ -19,12 +19,6 @@ namespace SpaceInvaders.Invaders
         [Tooltip("Reference to a projectile prefab to be shot.")]
         [SerializeField] private Projectile m_ProjectilePrefab;
 
-        [Tooltip("Minimum interval between projectileShots.")]
-        [SerializeField] private float m_MinimumShootInterval = 5f;
-
-        [Tooltip("Maximum interval between projectileShots.")]
-        [SerializeField] private float m_MaximumShootInteral = 20f;
-
         private ShootController m_ShootController;
 
         /// <summary>
@@ -32,23 +26,16 @@ namespace SpaceInvaders.Invaders
         /// </summary>
         public void Init ()
         {
-            var shootInterval = UnityEngine.Random.Range(m_MinimumShootInterval, m_MaximumShootInteral);
-            var firstShootTime = Time.time + shootInterval;
-            m_ShootController = new ShootController(m_ProjectilePrefab, shootInterval, firstShootTime);
+            m_ShootController = new ShootController(m_ProjectilePrefab, 0f);
             gameObject.SetActive(true);
         }
 
         /// <summary>
         /// Update the behaviour of the invader.
         /// </summary>
-        public void UpdateInvader()
+        public void Shoot()
         {
-            if(m_ShootController.TryShoot(transform.position))
-            {
-                //Update the next shoot interval
-                var shootInterval = UnityEngine.Random.Range(m_MinimumShootInterval, m_MaximumShootInteral);
-                m_ShootController.UpdateShootInterval(shootInterval);
-            }
+            m_ShootController.ShootImmediately(transform.position);
         }
 
         public void TakeTheBullet()

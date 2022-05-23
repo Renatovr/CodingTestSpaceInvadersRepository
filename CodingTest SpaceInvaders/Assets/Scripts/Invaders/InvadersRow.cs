@@ -117,14 +117,16 @@ namespace SpaceInvaders.Invaders
         }
 
         /// <summary>
-        /// Update all available invaders.
+        /// Signal a random invader on this row to shoot.
         /// </summary>
-        public void UpdateInvaders ()
+        public void SignalShoot ()
         {
-            var availableInvaders = m_Invaders.Where(inv => inv.gameObject.activeSelf);
-            foreach (var invader in availableInvaders)
+            var availableInvaders = m_Invaders.Where(inv => inv.gameObject.activeSelf).ToArray();
+
+            if(availableInvaders != null && availableInvaders.Length > 0)
             {
-                invader.UpdateInvader();
+                int chosenIndex = UnityEngine.Random.Range(0, availableInvaders.Length);
+                availableInvaders[chosenIndex].Shoot();
             }
         }
 

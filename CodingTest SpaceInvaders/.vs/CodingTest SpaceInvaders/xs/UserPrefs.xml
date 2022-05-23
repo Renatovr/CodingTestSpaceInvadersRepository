@@ -1,0 +1,35 @@
+﻿<Properties StartupConfiguration="{903597EE-6B39-0D38-BE0E-BF1723BA689D}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Invaders/Invader.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Player/PlayerView.cs" Line="72" Column="38" />
+      <File FileName="Assets/Scripts/Player/Controllers/PlayerMovementController.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Invaders/Models/RowConfigModel.cs" Line="15" Column="67" />
+      <File FileName="Assets/Scripts/Invaders/InvadersRow.cs" Line="22" Column="26" />
+      <File FileName="Assets/Scripts/Invaders/InvadersGroup.cs" Line="138" Column="30" />
+      <File FileName="Assets/Scripts/Projectiles/Projectile.cs" Line="45" Column="45" />
+      <File FileName="Assets/Scripts/ObjectPool/PoolManager.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/ObjectPool/Pool.cs" Line="45" Column="49" />
+      <File FileName="Assets/Scripts/ObjectPool/PooledBehaviour.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Interfaces/ICanTakeABullet.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Score/ScoreManager.cs" Line="25" Column="58" />
+      <File FileName="Assets/Scripts/Score/GameplayScoreView.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/GameplayManager.cs" Line="99" Column="19" />
+      <File FileName="Assets/Scripts/Score/Models/LeaderboardData.cs" Line="41" Column="14" />
+      <File FileName="Assets/Scripts/GameplayGuiControl.cs" Line="80" Column="1" />
+      <File FileName="Assets/Scripts/Score/LeaderboardView.cs" Line="19" Column="30" />
+      <File FileName="Assets/Scripts/AppManager.cs" Line="36" Column="54" />
+      <File FileName="Assets/Scripts/MainMenu.cs" Line="23" Column="87" />
+      <File FileName="Assets/Scripts/Blocks/Block.cs" Line="1" Column="2" />
+      <File FileName="Assets/Scripts/Invaders/ScriptableObjects/DifficultyConfiguration.cs" Line="9" Column="18" />
+      <File FileName="Assets/Scripts/Invaders/Invader.cs" Line="20" Column="64" />
+      <File FileName="Assets/Scripts/Projectiles/Controllers/ShootController.cs" Line="32" Column="21" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8360bfb9-f5dc-4f57-8caf-0533e06c4c1f" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

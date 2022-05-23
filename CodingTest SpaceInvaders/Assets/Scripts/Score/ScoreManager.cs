@@ -21,6 +21,10 @@ namespace SpaceInvaders.Score
         private int m_CurrentScore = 0;
         private int m_HighScore = 0;
 
+        private bool m_CurrentScoreIsHigh;
+
+        private string m_CurrentName => AppHelper.PlayerName;
+
         /// <summary>
         /// Score achieved from the current play session.
         /// </summary>
@@ -46,11 +50,15 @@ namespace SpaceInvaders.Score
 
             var highestPlayer = Leaderboard.GetHighestUser();
 
+            var highScorerName = string.Empty;
+
             if(highestPlayer != null)
             {
                 m_HighScore = highestPlayer.ScorePoints;
+                highScorerName = highestPlayer.PlayerName;
             }
 
+            m_GameplayScoreView.UpdateNames(m_CurrentName, highScorerName);
             m_GameplayScoreView.UpdateScores(m_CurrentScore, m_HighScore);
         }
 
@@ -65,6 +73,12 @@ namespace SpaceInvaders.Score
             if(m_CurrentScore > m_HighScore)
             {
                 m_HighScore = m_CurrentScore;
+
+                if(!m_CurrentScoreIsHigh)
+                {
+                    m_GameplayScoreView.UpdateNames(m_CurrentName, m_CurrentName);
+                    m_CurrentScoreIsHigh = true;
+                }
             }
 
             m_GameplayScoreView.UpdateScores(m_CurrentScore, m_HighScore);

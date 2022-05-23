@@ -11,9 +11,25 @@ namespace SpaceInvaders.Score
         [Tooltip("Reference to the text which displays the player's current score.")]
         [SerializeField] private Text m_CurrentScoreText;
 
+        [Tooltip("Reference to the text which displays the player's current name.")]
+        [SerializeField] private Text m_CurrentPlayerNameText;
+
         [Tooltip("Reference to the text which displays the current high score.")]
         [SerializeField] private Text m_HighScoreText;
 
+        [Tooltip("Reference to the text which displays the high score player's name.")]
+        [SerializeField] private Text m_HighPlayerName;
+
+        /// <summary>
+        /// Update the names displayed in the UI view.
+        /// </summary>
+        /// <param name="currentName">Name defined for the current session.</param>
+        /// <param name="highScoreName">Name of the player with the highest score on the leaderboard.</param>
+        public void UpdateNames (string currentName, string highScoreName)
+        {
+            m_CurrentPlayerNameText.text = currentName;
+            m_HighPlayerName.text = highScoreName;
+        }
         /// <summary>
         /// Update the scores shown on the UI.
         /// </summary>

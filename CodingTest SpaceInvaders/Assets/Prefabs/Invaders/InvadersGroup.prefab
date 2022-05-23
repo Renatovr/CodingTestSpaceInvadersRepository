@@ -94,6 +94,10 @@ MonoBehaviour:
       type: 3}
   m_InvadersHolder: {fileID: 4570203176358868578}
   m_InvaderSpacing: 1.5
-  m_MovementSpeed: 1
-  m_DownwardStep: 0.5
+  m_MovementSpeed: 0.5
+  m_DownwardStep: 0.3
   m_ScreenEdgePadding: 0.5
+  m_MaximumInvasionPositionY: -5
+  m_MinimumShootInterval: 2
+  m_MaximumShootInteral: 6
+  m_DifficultyConfig: {fileID: 11400000, guid: 0adedc269473d4e83a3a27948def328a, type: 2}

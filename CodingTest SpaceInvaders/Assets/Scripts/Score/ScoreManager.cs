@@ -21,6 +21,11 @@ namespace SpaceInvaders.Score
         private int m_CurrentScore = 0;
         private int m_HighScore = 0;
 
+        /// <summary>
+        /// Score achieved from the current play session.
+        /// </summary>
+        public int SessionScore => m_CurrentScore;
+
         private void Awake()
         {
             if(Instance != null && Instance != this)

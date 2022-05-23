@@ -92,6 +92,14 @@ public class GameplayManager : MonoBehaviour
     }
 
     /// <summary>
+    /// The invaders have reached their target position and the player has lost.
+    /// </summary>
+    public void InvadersAreHere ()
+    {
+        EndGame();
+    }
+
+    /// <summary>
     /// Decide on whether the player should respawn based on how many lives left.
     /// </summary>
     /// <param name="respawnAction">Action to execute for respawn</param>

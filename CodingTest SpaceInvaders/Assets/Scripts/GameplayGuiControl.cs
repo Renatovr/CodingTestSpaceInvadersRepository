@@ -16,6 +16,9 @@ public class GameplayGuiControl : MonoBehaviour
     [Tooltip("An object to be displayed when the play session is over.")]
     [SerializeField] private GameObject m_GameOverMenu;
 
+    [Tooltip("Reference to the score text on the game over menu.")]
+    [SerializeField] private Text m_GameOverScoreText;
+
     private void Start()
     {
         GameplayManager.Instance.OnGameSessionEnded += OnGameSessionEnded;
@@ -71,6 +74,10 @@ public class GameplayGuiControl : MonoBehaviour
     private void OnGameSessionEnded ()
     {
         GameplayManager.Instance.OnGameSessionEnded -= OnGameSessionEnded;
+
+        int sessionScore = ScoreManager.Instance?.SessionScore ?? 0;
+        m_GameOverScoreText.text = sessionScore.ToString();
+
         m_PauseButton.gameObject.SetActive(false);
         m_PauseMenu.SetActive(false);
         m_GameOverMenu.SetActive(true);

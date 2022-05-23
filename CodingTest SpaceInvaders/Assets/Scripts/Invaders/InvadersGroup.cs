@@ -32,9 +32,22 @@ namespace SpaceInvaders.Invaders
         [Tooltip("Padding from the actual left/right screen edge. Used in determining when to move the group down.")]
         [SerializeField] private float m_ScreenEdgePadding = 0.5f;
 
+        [Tooltip("The position on the y-axis the invader group needs to reach for the player to lose.")]
+        [SerializeField] private float m_MaximumInvasionPositionY = -6.0f;
+
+        [Space]
+        [Header("Progression")]
+        [Tooltip("Reference to a difficulty configuration asset.")]
+        [SerializeField] private InvadersDifficultyConfiguration m_DifficultyConfig;
+
         private List<InvadersRow> m_InvadersRows;
         private Vector2 m_MovementDirection;
         private Vector3 m_InvadersHolderStartPosition;
+
+        private float m_WaveSpeed = 1.0f;
+        private float m_ProgressionSpeed = 0.0f;
+
+        private float m_DifficultySpeedMultiplier => (m_WaveSpeed + m_ProgressionSpeed);
 
         // Start is called before the first frame update.
         private void Start()
@@ -81,6 +94,7 @@ namespace SpaceInvaders.Invaders
                 //Create new invader row to manage all invaders in this row.
                 var row = new InvadersRow();
                 row.OnRowCleared += OnRowCleared;
+                row.OnInvaderKilledEvent += OnInvaderKilled;
                 m_InvadersRows.Add(row);
 
                 var prefab = rowConfig.InvaderPrefab;
@@ -114,7 +128,7 @@ namespace SpaceInvaders.Invaders
 
         private void UpdateGroupPosition ()
         {
-            Vector3 movement = m_MovementSpeed * Time.deltaTime * m_MovementDirection;
+            Vector3 movement = m_MovementSpeed * Time.deltaTime * m_MovementDirection * m_DifficultySpeedMultiplier;
             m_InvadersHolder.position += movement;
 
             var cam = Camera.main;
@@ -156,6 +170,27 @@ namespace SpaceInvaders.Invaders
 
             //Change movement direction
             m_MovementDirection.x *= -1.0f;
+
+            //Check for invasion.
+            foreach (var row in m_InvadersRows)
+            {
+                if (!row.HasAvailableInvader)
+                {
+                    continue;
+                }
+
+                if (row.HasInvaderReachedInvasionHeight(m_MaximumInvasionPositionY))
+                {
+                    Debug.Log("Invaders are here");
+                    GameplayManager.Instance.InvadersAreHere();
+                    enabled = false;
+                }
+            }
+        }
+
+        private void OnInvaderKilled ()
+        {
+            IncreaseDifficultyPerInvaderKilled();
         }
 
         private void OnRowCleared ()
@@ -179,6 +214,7 @@ namespace SpaceInvaders.Invaders
 
         private void EndWave ()
         {
+            IncreaseDifficultyPerWaveCleared();
             StartCoroutine(WaitAndResetInvaders());
         }
 
@@ -192,6 +228,24 @@ namespace SpaceInvaders.Invaders
             {
                 row.ResetRow();
             }
+        }
+
+        private void IncreaseDifficultyPerInvaderKilled ()
+        {
+            if(m_DifficultyConfig != null)
+            {
+                m_ProgressionSpeed += m_DifficultyConfig.SpeedIncreasePerInvaderDeath;
+            }
+        }
+
+        private void IncreaseDifficultyPerWaveCleared()
+        {
+            if (m_DifficultyConfig != null)
+            {
+                m_WaveSpeed += m_DifficultyConfig.SpeedIncreasePerWaveCleared;
+            }
+
+            m_ProgressionSpeed = 0f;
         }
     }
 }

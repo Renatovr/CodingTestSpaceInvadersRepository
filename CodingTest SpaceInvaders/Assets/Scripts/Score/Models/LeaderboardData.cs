@@ -39,8 +39,6 @@ namespace SpaceInvaders.Score
             {
                 Data = new LeaderboardData();
             }
-
-            Debug.Log("Leaderboard loaded with entry count: " + Data.LeaderboardEntries.Count);
         }
 
         /// <summary>
@@ -59,7 +57,6 @@ namespace SpaceInvaders.Score
             var bf = new BinaryFormatter();
             bf.Serialize(file, Data);
             file.Close();
-            Debug.Log("Leaderboard saved with entry count: " + Data.LeaderboardEntries.Count);
         }
 
         /// <summary>

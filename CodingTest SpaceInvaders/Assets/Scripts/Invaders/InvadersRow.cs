@@ -9,7 +9,15 @@ namespace SpaceInvaders.Invaders
     /// </summary>
     public class InvadersRow
     {
+        /// <summary>
+        /// Event called when all invaders on this row are killed.
+        /// </summary>
         public event Action OnRowCleared;
+
+        /// <summary>
+        /// Event called each time an invader is killed.
+        /// </summary>
+        public event Action OnInvaderKilledEvent;
 
         private List<Invader> m_Invaders;
 
@@ -87,6 +95,28 @@ namespace SpaceInvaders.Invaders
         }
 
         /// <summary>
+        /// Check whether an invader of this row has reached invasion height.
+        /// </summary>
+        /// <param name="invasionHeight">The height at which invasion commences.</param>
+        /// <returns>Returns true if the row has an invader below/at the invasion height.</returns>
+        public bool HasInvaderReachedInvasionHeight(float invasionHeight)
+        {
+            foreach(var invader in m_Invaders)
+            {
+                if(!invader.gameObject.activeSelf)
+                {
+                    continue;
+                }
+
+                if(invader.transform.position.y <= invasionHeight)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Update all available invaders.
         /// </summary>
         public void UpdateInvaders ()
@@ -112,6 +142,7 @@ namespace SpaceInvaders.Invaders
         private void OnInvaderKilled (Invader invader)
         {
             invader.OnInvaderKilled -= OnInvaderKilled;
+            OnInvaderKilledEvent?.Invoke();
 
             if(!HasAvailableInvader)
             {
